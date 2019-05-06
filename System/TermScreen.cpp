@@ -1,5 +1,6 @@
 #include "TermScreen.h"
-#include <Geometry/PixelMatrix.h>
+#include "Geometry/PixelMatrix.h"
+#include "Geometry/Shape.h"
 
 #if defined(_WIN32) || defined(_WIN64)
 #include <conio.h>

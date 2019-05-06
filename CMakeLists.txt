@@ -1,8 +1,9 @@
 cmake_minimum_required (VERSION 3.0)
 project (MyFirstGame)
 
-file (GLOB include_files
-	"Geometry/*.h"
+file (GLOB include_dirs
+	"."
+	".."
 )
 
 file (GLOB source_files
@@ -19,4 +20,4 @@ file (GLOB source_files
 #	"Model/*/*.cpp"	
 
 add_executable (MyFirstGame ${source_files})
-target_include_directories(MyFirstGame PRIVATE ${include_files})
+target_include_directories(MyFirstGame PRIVATE ".")
