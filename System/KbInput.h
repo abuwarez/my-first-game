@@ -10,7 +10,7 @@
 #include <unistd.h>
 #include <stdio.h>
 
-char _getch()
+bool _getch(char & out)
 {
 	char buf = 0;
 	struct termios old = { 0 };
@@ -19,18 +19,24 @@ char _getch()
 		perror("tcsetattr()");
 	old.c_lflag &= ~ICANON;
 	old.c_lflag &= ~ECHO;
-	old.c_cc[VMIN] = 1;
+	old.c_cc[VMIN] = 0;
 	old.c_cc[VTIME] = 0;
 	if (tcsetattr(0, TCSANOW, &old) < 0)
 		perror("tcsetattr ICANON");
-	if (read(0, &buf, 1) < 0)
+	int readVal = read(0, &buf, 1);
+	if (readVal < 0)
 		perror("read()");
+	else if (readVal > 0)
+	{
+		out = buf;
+	}
+
 	old.c_lflag |= ICANON;
 	old.c_lflag |= ECHO;
 	if (tcsetattr(0, TCSADRAIN, &old) < 0)
 		perror("tcsetattr ~ICANON");
 	//printf("%c\n",buf);
-	return buf;
+	return readVal > 0;
 }
 
 #endif
