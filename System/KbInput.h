@@ -4,13 +4,24 @@
 
 #include <conio.h>
 
+bool _getch_non_blocking(char & out)
+{
+	if (_kbhit())
+	{
+		out = _getch();
+		return true;
+	}
+
+	return false;
+}
+
 #else
 
 #include <termios.h>
 #include <unistd.h>
 #include <stdio.h>
 
-bool _getch(char & out)
+bool _getch_non_blocking(char & out)
 {
 	char buf = 0;
 	struct termios old = { 0 };

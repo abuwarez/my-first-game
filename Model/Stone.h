@@ -18,7 +18,7 @@ namespace MyGame
 		virtual const Shape & GetShape() const override { return mShape; };
 		virtual int GetX() const override { return mX; }
 		virtual int GetY() const override { return mY; }
-		int SetX(int x) { mX = x; }
-		int SetY(int y) { mY = y; }
+		void SetX(int x) { mX = x; }
+		void SetY(int y) { mY = y; }
 	};
 }
